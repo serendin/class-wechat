@@ -1,0 +1,28 @@
+{{set . "title" "课程微视频"}}
+{{append . "moreStyles" "css/video-js.css"}}
+{{append . "moreStyles" "css/demos.css"}}
+{{append . "moreScripts" "plugins/video.js"}}
+{{template "header.html" .}}
+
+<header class="demos-header">
+    <h1 class="demos-title">{{.result.Name}}</h1>
+</header>
+
+<article class="weui-article">
+    <section>
+        <p>{{.result.Brief}}</p>
+        <div id="createdAt"></div>
+        <script type="text/javascript">
+            if({{.result.CreatedAt}}!=null){
+                var c={{.result.CreatedAt}};
+                $('#createdAt').html("发布时间："+c.substr(0,19).replace('T',' '))
+            }
+        </script>
+        <video class="video-js" id="video" preload="auto" height="200px" poster="http://localhost:8080{{.result.Poster}}" controls data-setup='{}'>
+            <source src="http://localhost:8080{{.result.Url}}"></video>
+        </video>
+    </section>
+</article>
+
+
+{{template "footer.html" .}}

@@ -47,7 +47,7 @@ func InitDB(){
 	driver:=getParamString("db.driver","mysql")
 	connectionString := getConnectionString()
 	var err error
-	log.Println(driver,"miaowu_app:fxJVPLYOu5GcUPIXgedF@tcp(rm-bp1c2nd5m74u7800t.mysql.rds.aliyuncs.com:3306)/wxpets?charset=utf8&parseTime=true&loc=Asia%2FShanghai")
+	log.Println(driver,connectionString)
 	DB, err = gorm.Open(driver,connectionString)
 	if err != nil {
 		revel.WARN.Printf("DB错误: %v", err)

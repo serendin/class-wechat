@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>课堂互动平台</title>
+    <title>{{.title}}</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -11,14 +11,13 @@
 
     <link rel="stylesheet" href="/public/jquery-weui/dist/lib/weui.min.css">
     <link rel="stylesheet" href="/public/jquery-weui/dist/css/jquery-weui.css">
-    <link rel="stylesheet" href="/public/jquery-weui/dist/demos/css/demos.css">
-    <script src="/public/js/bootstrap-3.3.6.min.js"></script>
-{{range .moreStyles}}
-    <link rel="stylesheet" type="text/css" href="/public/{{.}}">
-{{end}}
-{{range .moreScripts}}
-    <script src="/public/{{.}}" type="text/javascript" charset="utf-8"></script>
-{{end}}
+    <script src="/public/jquery-weui/dist/lib/jquery-2.1.4.js"></script>
+    {{range .moreStyles}}
+        <link rel="stylesheet" type="text/css" href="/public/{{.}}">
+    {{end}}
+    {{range .moreScripts}}
+        <script src="/public/{{.}}" type="text/javascript" charset="utf-8"></script>
+    {{end}}
 </head>
 
 <body>
