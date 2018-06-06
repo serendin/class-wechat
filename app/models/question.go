@@ -9,7 +9,7 @@ type Question struct {
 	ID           int64     `json:"id"`
 	Name         string    `json:"name"`
 	LectureId    int       `json:"lecture_id"`
-	StuId        string    `json:"stu_id"`
+	StuNo        string    `json:"stu_no"`
 	Title        string    `json:"title"`
 	Question     string    `json:"question"`
 	CreatedAt    time.Time `json:"created_at"`
@@ -33,7 +33,7 @@ func GetQuestionList(page,size int,search string) (list []*Question) {
 	err:=DB.Debug().Table(QuestionTable+" as n").Select("n.*,les.name as lesson_name,stu.name as stu_name").
 		Joins("left join lecture as lec on lec.id=n.lecture_id").
 		Joins("left join lesson as les on les.number=lec.lesson_no").
-		Joins("left join student as stu on stu.stu_id=n.stu_id").
+		Joins("left join student as stu on stu.stu_id=n.stu_no").
 		Where("n.title like ? or les.name like ? or question like ?",search,search,search).
 		Limit(size).Order("updated_at desc").Offset((page-1)*size).Scan(&list)
 	if err!=nil{
