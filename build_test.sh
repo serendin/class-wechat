@@ -12,9 +12,9 @@ export GOPATH=$OLD_GOPATH:$NEW_GOPATH
 
 cd src
 
-if [ -f ".server_admin.pid" ]; then
-  kill -9 `cat .server_admin.pid`
-  rm -rf ".server_admin.pid"
+if [ -f ".server_cw.pid" ]; then
+  kill -9 `cat .server_cw.pid`
+  rm -rf ".server_cw.pid"
 fi
 
 
