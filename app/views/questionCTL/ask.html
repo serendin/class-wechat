@@ -1,43 +1,67 @@
 {{set . "title" "问答"}}
 {{append . "moreStyles" "css/demos.css"}}
+{{append . "moreScripts" "js/jquery.validate.min.js"}}
+{{append . "moreScripts" "js/jquery.form.min.js"}}
 {{template "header.html" .}}
 
 <header class="demos-header">
     <h1 class="demos-title">提问</h1>
 </header>
-<div class="weui-cells weui-cells_form">
-    <div class="weui-cells__title">标题</div>
-    <div class="weui-cells">
-        <div class="weui-cell">
-            <div class="weui-cell__bd">
-                <input class="weui-input" type="text" placeholder="请输入文本">
-            </div>
-        </div>
-    </div>
-    <div class="weui-cell">
-        <div class="weui-cell__hd"><label for="name" class="weui-label">课程</label></div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" id="lesson" type="text">
-        </div>
-    </div>
-    <div class="weui-cells__title">问题详情</div>
+<form id="askForm">
     <div class="weui-cells weui-cells_form">
+        <div class="weui-cells__title">标题</div>
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" name="title" type="text" placeholder="请输入文本">
+                </div>
+            </div>
+        </div>
         <div class="weui-cell">
+            <div class="weui-cell__hd"><label for="name" class="weui-label">课程</label></div>
             <div class="weui-cell__bd">
-                <textarea class="weui-textarea" placeholder="请输入文本" rows="3"></textarea>
-                <div class="weui-textarea-counter"><span>0</span>/200</div>
+                <input class="weui-input" id="lesson" type="text">
+            </div>
+        </div>
+        <input type="hidden" name="lectureId">
+        <div class="weui-cells__title">问题详情</div>
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <textarea class="weui-textarea" name="question" placeholder="请输入文本" rows="3"></textarea>
+                    <div class="weui-textarea-counter"><span>0</span>/200</div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="weui-btn-area">
-    <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">提交</a>
-</div>
+    <div class="weui-btn-area">
+        <button type="submit" id="askBtn" class="weui-btn weui-btn_primary">提交</button>
+    </div>
+</form>
 <script>
-    console.log({{.lessons}})
-    $('#lesson').select({
-        title:'选择课程',
-        items:[{title:'1',value:'123'},{title:'2',value:'1233'}]
+    $(function(){
+        $('#lesson').select({
+            title:'选择课程',
+            items:{{.lessons}}
+        });
+        $("#askForm").validate({
+            submitHandler:function(){
+                console.log($('#lesson').data('values'))
+                $('input[name="lectureId"]').val($('#lesson').data('values'));
+                $('#askForm').ajaxSubmit({
+                    type:'post',
+                    url:'/questionCTL/askForm',
+                    success:function(data){
+                        if(data.code==0){
+                            $.toast(data.msg,"cancel")
+                        }
+                    },
+                    error:function(){
+                        $.toast("信息获取失败","cancel")
+                    }
+                })
+            }
+        });
     })
 </script>
 {{template "footer.html" .}}

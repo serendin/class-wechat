@@ -32,3 +32,24 @@ func (c QuestionCTL) Ask() revel.Result {
 	lessons:=models.GetLessonList("20090001")
 	return c.Render(lessons)
 }
+
+
+func (c QuestionCTL) AskForm() revel.Result {
+	resp:=models.Resp{Code:0}
+	title:=c.Params.Form.Get("title")
+	ques:=c.Params.Form.Get("question")
+	lectureId,err:=strconv.Atoi(c.Params.Form.Get("lectureId"))
+	if title==""||err!=nil||lectureId==0{
+		resp.Msg="输入有误"
+		return c.RenderJSON(resp)
+	}
+	question:=models.Question{Title:title,Question:ques,LectureId:lectureId,
+		StuNo:"20090001"}
+	err=question.Save()
+	if err!=nil{
+		resp.Msg="数据库错误"
+	}else{
+		resp.Code=1
+	}
+	return c.RenderJSON(resp)
+}

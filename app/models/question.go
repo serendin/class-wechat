@@ -7,7 +7,6 @@ import (
 
 type Question struct {
 	ID           int64     `json:"id"`
-	Name         string    `json:"name"`
 	LectureId    int       `json:"lecture_id"`
 	StuNo        string    `json:"stu_no"`
 	Title        string    `json:"title"`
@@ -16,9 +15,10 @@ type Question struct {
 	Answer       string    `json:"answer"`
 	Number       int       `json:"number"`
 	UpdatedAt    time.Time `json:"updated_at"`
+	Status       int       `gorm:"default:0"`
 
-	LessonName string     `json:"lesson_name"`
-	StuName    string     `json:"stu_name"`
+	LessonName string     `json:"lesson_name" gorm:"-"`
+	StuName    string     `json:"stu_name" gorm:"-"`
 
 }
 
@@ -61,4 +61,9 @@ func GetLessonList(stu string) (list []*Lesson) {
 		revel.WARN.Println("GetLessonList Error:%v",err)
 	}
 	return
+}
+
+func (q *Question) Save() error {
+	err:= DB.Save(q).Error
+	return err
 }

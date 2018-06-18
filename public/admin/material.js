@@ -31,7 +31,7 @@ function showData(data) {
                 $('<li>').addClass('weui-media-box__info__meta').html(v.tea_name)).append(
                 $('<li>').addClass('weui-media-box__info__meta  weui-media-box__info__meta_extra').html(v.lesson_name)).append(
                 $('<li>').addClass('weui-media-box__info__meta  weui-media-box__info__meta_extra').html(v.updated_at.substr(5,11).replace('T',' '))).append(
-                $('<a>').addClass('weui-badge').html('&nbsp下载&nbsp&nbsp').css('background-color','#24b5f6').attr('href',"http://localhost:8080"+v.url)
+                $('<a>').addClass('weui-badge').html('&nbsp下载&nbsp&nbsp').css('background-color','#24b5f6').attr('href',v.url)
             );
             $('.weui-panel__bd').append($div.append($h).append($p).append($ul))
 
