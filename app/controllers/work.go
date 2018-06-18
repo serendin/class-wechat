@@ -11,6 +11,9 @@ type WorkCTL struct {
 }
 
 func (c WorkCTL) Work() revel.Result {
+	if c.Session["username"]==""{
+		return c.Redirect("/app/homeForm")
+	}
 	return c.Render()
 }
 

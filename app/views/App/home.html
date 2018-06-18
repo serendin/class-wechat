@@ -1,5 +1,6 @@
 {{set . "title" "个人中心"}}
 {{append . "moreStyles" "css/demos.css"}}
+{{append . "moreScripts" "js/jquery.form.min.js"}}
 {{template "header.html" .}}
 
 <header class="demos-header">
@@ -9,37 +10,37 @@
     <div class="weui-cell">
         <div class="weui-cell__hd"><label class="weui-label">姓名</label></div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="number" pattern="[0-9]*" placeholder="请输入姓名">
+            <input class="weui-input" value="{{.user.Name}}" readonly>
         </div>
     </div>
     <div class="weui-cell">
         <div class="weui-cell__hd"><label class="weui-label">学号</label></div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="number" pattern="[0-9]*" placeholder="请输入学号">
+            <input class="weui-input" value="{{.user.StuId}}" readonly>
         </div>
     </div>
     <div class="weui-cell">
         <div class="weui-cell__hd"><label class="weui-label">身份证号</label></div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="number" pattern="[0-9]*" placeholder="请输入身份证号">
+            <input class="weui-input" value="{{.user.Idcard}}" readonly>
         </div>
     </div>
 
     <div class="weui-cell">
         <div class="weui-cell__hd"><label class="weui-label">邮箱</label></div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="number" pattern="[0-9]*" placeholder="请输入邮箱">
+            <input class="weui-input" value="{{.user.Email}}" readonly>
         </div>
     </div>
-    <div class="weui-cell">
-        <div class="weui-cell__hd"><label for="" class="weui-label">出生日期</label></div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="date" value="">
-        </div>
-    </div>
+    {{/*<div class="weui-cell">*/}}
+        {{/*<div class="weui-cell__hd"><label for="" class="weui-label">出生日期</label></div>*/}}
+        {{/*<div class="weui-cell__bd">*/}}
+            {{/*<input class="weui-input" readonly>*/}}
+        {{/*</div>*/}}
+    {{/*</div>*/}}
 
 </div>
 <div class="weui-btn-area">
-    <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">绑定</a>
+    <a href="/app/unBind" class="weui-btn weui-btn_warn">解除绑定</a>
 </div>
 {{template "footer.html" .}}

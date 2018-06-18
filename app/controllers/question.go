@@ -11,6 +11,9 @@ type QuestionCTL struct {
 }
 
 func (c QuestionCTL) Question() revel.Result {
+	if c.Session["username"]==""{
+		return c.Redirect("/app/homeForm")
+	}
 	return c.Render()
 }
 
@@ -24,12 +27,12 @@ func (c QuestionCTL) List() revel.Result {
 func (c QuestionCTL) MyList() revel.Result {
 	search:=c.Params.Get("searchInput")
 	page,_:=strconv.Atoi(c.Params.Get("page"))
-	list:=models.GetQuestionList(page,10,search,"20090001")
+	list:=models.GetQuestionList(page,10,search,c.Session["username"])
 	return c.RenderJSON(list)
 }
 
 func (c QuestionCTL) Ask() revel.Result {
-	lessons:=models.GetLessonList("20090001")
+	lessons:=models.GetLessonList(c.Session["username"])
 	return c.Render(lessons)
 }
 
@@ -44,7 +47,7 @@ func (c QuestionCTL) AskForm() revel.Result {
 		return c.RenderJSON(resp)
 	}
 	question:=models.Question{Title:title,Question:ques,LectureId:lectureId,
-		StuNo:"20090001"}
+		StuNo:c.Session["username"]}
 	err=question.Save()
 	if err!=nil{
 		resp.Msg="数据库错误"

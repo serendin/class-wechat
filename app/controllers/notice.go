@@ -11,6 +11,9 @@ type NoticeCTL struct {
 }
 
 func (c NoticeCTL) Notice() revel.Result {
+	if c.Session["username"]==""{
+		return c.Redirect("/app/homeForm")
+	}
 	return c.Render()
 }
 

@@ -46,7 +46,6 @@
         });
         $("#askForm").validate({
             submitHandler:function(){
-                console.log($('#lesson').data('values'))
                 $('input[name="lectureId"]').val($('#lesson').data('values'));
                 $('#askForm').ajaxSubmit({
                     type:'post',
@@ -54,6 +53,9 @@
                     success:function(data){
                         if(data.code==0){
                             $.toast(data.msg,"cancel")
+                        }else{
+                            $.toast("提交成功");
+                            setTimeout('window.history.go(-1)',1000);
                         }
                     },
                     error:function(){
