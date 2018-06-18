@@ -15,7 +15,7 @@
     <div class="weui-tab__bd">
         <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
             <div class="weui-search-bar" id="searchBar">
-                <form class="weui-search-bar__form" id="searchForm">
+                <form class="weui-search-bar__form" id="searchAll">
                     <div class="weui-search-bar__box">
                         <i class="weui-icon-search"></i>
                         <input type="search" class="weui-search-bar__input" name="searchInput" placeholder="搜索">
@@ -28,12 +28,12 @@
                 </form>
                 <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
             </div>
-            <div class="weui-panel__bd">
+            <div class="weui-panel__bd question_list">
             </div>
         </div>
         <div id="tab2" class="weui-tab__bd-item">
             <div class="weui-search-bar" id="searchBar">
-                <form class="weui-search-bar__form" id="searchForm">
+                <form class="weui-search-bar__form" id="searchMine">
                     <div class="weui-search-bar__box">
                         <i class="weui-icon-search"></i>
                         <input type="search" class="weui-search-bar__input" name="searchInput" placeholder="搜索">
@@ -45,8 +45,10 @@
                     </label>
                 </form>
                 <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
+                <a href="/questionCTL/ask" class="weui-btn weui-btn_mini weui-btn_plain-default" style="margin-left: 5px; ">提问</a>
             </div>
-            <div class="weui-panel__bd">
+
+            <div class="weui-panel__bd question_mine">
             </div>
         </div>
     </div>

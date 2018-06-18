@@ -28,16 +28,37 @@ func (Question) TableName() string {
 	return QuestionTable
 }
 
-func GetQuestionList(page,size int,search string) (list []*Question) {
+type Lesson struct {
+	Value    int      `json:"value"`
+	Title    string   `json:"title"`
+}
+
+func GetQuestionList(page,size int,search string,stu string) (list []*Question) {
 	search="%"+search+"%"
-	err:=DB.Debug().Table(QuestionTable+" as n").Select("n.*,les.name as lesson_name,stu.name as stu_name").
+	_db:=DB.Debug().Table("class	 "+" as n").Select("n.*,les.name as lesson_name,stu.name as stu_name").
 		Joins("left join lecture as lec on lec.id=n.lecture_id").
 		Joins("left join lesson as les on les.number=lec.lesson_no").
 		Joins("left join student as stu on stu.stu_id=n.stu_no").
-		Where("n.title like ? or les.name like ? or question like ?",search,search,search).
-		Limit(size).Order("updated_at desc").Offset((page-1)*size).Scan(&list)
+		Where("n.title like ? or les.name like ? or question like ?",search,search,search)
+	if stu!=""{
+		_db=_db.Where("stu.stu_id = ?",stu)
+	}
+	err:=_db.Limit(size).Order("updated_at desc").Offset((page-1)*size).Scan(&list)
+
 	if err!=nil{
 		revel.WARN.Println("GetQuestionList Error:%v",err)
+	}
+	return
+}
+
+func GetLessonList(stu string) (list []*Lesson) {
+	err:=DB.Debug().Table("class as n").Select("n.lecture_id as value,les.name as title").
+		Joins("left join lecture as lec on lec.id=n.lecture_id").
+		Joins("left join lesson as les on les.number=lec.lesson_no").
+		Where("n.stu_no = ?",stu).Scan(&list)
+
+	if err!=nil{
+		revel.WARN.Println("GetLessonList Error:%v",err)
 	}
 	return
 }
