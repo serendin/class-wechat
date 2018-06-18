@@ -26,7 +26,7 @@ function showData(data) {
         $.each(data,function (i,v) {
             var $a=$('<a>').attr('href','/videoCTL/detail?id='+v.id).addClass('weui-media-box weui-media-box_appmsg');
             var $hd=$('<div>').addClass('weui-media-box__hd').append(
-                $('<img>').addClass('weui-media-box__thumb').attr('src',"http://localhost:8080"+v.poster));
+                $('<img>').addClass('weui-media-box__thumb').attr('src',v.poster));
             var $bd=$('<div>').addClass('weui-media-box__bd').append(
                 $('<h4>').addClass('weui-media-box__title').html(v.name)).append(
                 $('<p>').addClass('weui-media-box__desc').html(v.brief));
