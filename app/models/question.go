@@ -35,7 +35,7 @@ type Lesson struct {
 
 func GetQuestionList(page,size int,search string,stu string) (list []*Question) {
 	search="%"+search+"%"
-	_db:=DB.Debug().Table("class	 "+" as n").Select("n.*,les.name as lesson_name,stu.name as stu_name").
+	_db:=DB.Debug().Table(QuestionTable+" as n").Select("n.*,les.name as lesson_name,stu.name as stu_name").
 		Joins("left join lecture as lec on lec.id=n.lecture_id").
 		Joins("left join lesson as les on les.number=lec.lesson_no").
 		Joins("left join student as stu on stu.stu_id=n.stu_no").
