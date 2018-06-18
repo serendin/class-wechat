@@ -18,7 +18,7 @@
                 $('#createdAt').html("发布时间："+c.substr(0,19).replace('T',' '))
             }
         </script>
-        <video class="video-js" id="video" preload="auto" height="200px" poster="http://localhost:8080{{.result.Poster}}" controls data-setup='{}'>
+        <video class="video-js" id="video" preload="auto" height="200px" poster="{{.result.Poster}}" controls data-setup='{}'>
             <source src="{{.result.Url}}"></video>
         </video>
     </section>
